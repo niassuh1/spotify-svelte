@@ -11,7 +11,8 @@
 <main class="w-full min-h-screen flex items-center justify-center">
   <Card.Root>
     <Card.Header class="flex items-center">
-      <Icon class="text-2xl text-primary" icon="mdi:spotify" />
+      <Icon class="text-9xl text-primary" icon="mdi:spotify" />
+      <div class="text-sm font-semibold">Spotify Clone</div>
       <div class="text-muted-foreground">Login to continue</div>
     </Card.Header>
     <Card.Content>

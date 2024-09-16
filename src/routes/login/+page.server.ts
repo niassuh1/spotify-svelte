@@ -8,7 +8,7 @@ export const load: PageServerLoad = ({ cookies }) => {
   const accessToken = cookies.get("access_token");
 
   if (accessCode && accessToken) {
-    redirect(301, "/");
+    redirect(301, "/home");
   }
 };
 

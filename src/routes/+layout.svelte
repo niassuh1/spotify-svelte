@@ -1,11 +1,8 @@
 <script>
-  import Header from "$lib/components/widgets/header.svelte";
+  import Header from "./home/_components/header.svelte";
   import "../app.css";
 </script>
 
 <div>
-  <Header />
-  <div class=" w-full mx-auto max-w-screen-xl">
-    <slot />
-  </div>
+  <slot />
 </div>

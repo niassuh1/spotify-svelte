@@ -5,7 +5,7 @@ export const GET: RequestHandler = ({ url, cookies }) => {
   const code = url.searchParams.get("code");
   if (code) {
     cookies.set("access_code", code, { path: "/" });
-    redirect(301, "/");
+    redirect(301, "/home");
   }
   return new Response();
 };
