@@ -10,11 +10,15 @@ export const load = (async ({ cookies }) => {
   const accessToken = cookies.get("access_token");
   if (accessToken) {
     const user = await spotifyClient.getCurrentUserProfile({ accessToken });
+    const categories = await spotifyClient.getCategories({
+      accessToken,
+      limit: 15,
+    });
     return {
       user,
+      categories,
     };
   }
-  return {};
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {

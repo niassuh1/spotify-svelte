@@ -14,6 +14,8 @@ const config = {
     adapter: adapter(),
     alias: {
       "@/*": "./path/to/lib/*",
+      types: "./src/types",
+      constants: "./src/constants",
     },
   },
 };

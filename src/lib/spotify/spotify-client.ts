@@ -4,9 +4,11 @@ import {
   SPOTIFY_API_URL,
   SPOTIFY_BASE_URL,
   SPOTIFY_CLIENT_ID,
-} from "../../constants/spotify";
-import type { UserDetails } from "../../types/user-details";
+} from "constants/spotify";
+
 import axios from "axios";
+import type { UserDetails } from "types/user-details";
+import type { Categories } from "types/categories";
 
 class SpotifyClient {
   login() {
@@ -30,6 +32,25 @@ class SpotifyClient {
       },
     });
     return res.data as UserDetails;
+  }
+
+  async getCategories({
+    accessToken,
+    limit,
+  }: {
+    accessToken: string;
+    limit: number;
+  }): Promise<Categories> {
+    const res = await axios.get(
+      `${SPOTIFY_API_URL}/v1/browse/categories?limit=${limit}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return res.data.categories as Categories;
   }
 }
 
