@@ -40,7 +40,7 @@
   let route = $page.route.id;
 </script>
 
-<aside class="p-3 border-e hidden sm:flex flex-col items-center gap-3">
+<aside class="p-3 border-e hidden md:flex flex-col items-center gap-3">
   <Icon class="text-3xl text-primary" icon="mdi:spotify" />
   {#each navList as navItem}
     <Tooltip.Root openDelay={250}>
@@ -61,19 +61,26 @@
 {#if $isMobile}
   <Drawer.Root
     direction="left"
-    onClose={() => sideNavOpenWritable.update((value) => false)}
+    onClose={() => {
+      // Timeout for the animation
+      setTimeout(() => {
+        sideNavOpenWritable.update(() => false);
+      }, 200);
+    }}
     open={isSideNavOpen}
   >
-    <Drawer.Content class="p-3 flex flex-col gap-3 h-screen w-64">
-      {#each navList as navItem}
-        <Button
-          class="justify-start items-center gap-2"
-          variant={route == navItem.href ? "secondary" : "ghost"}
-        >
-          <Icon icon={navItem.icon} />
-          <span>{navItem.title}</span>
-        </Button>
-      {/each}
-    </Drawer.Content>
+    <Drawer.Portal>
+      <Drawer.Content class="p-3 flex flex-col gap-3  w-64">
+        {#each navList as navItem}
+          <Button
+            class="justify-start items-center gap-2"
+            variant={route == navItem.href ? "secondary" : "ghost"}
+          >
+            <Icon icon={navItem.icon} />
+            <span>{navItem.title}</span>
+          </Button>
+        {/each}
+      </Drawer.Content>
+    </Drawer.Portal>
   </Drawer.Root>
 {/if}

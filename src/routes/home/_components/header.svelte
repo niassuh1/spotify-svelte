@@ -13,7 +13,7 @@
       on:click={() => {
         sideNavOpenWritable.update((value) => !value);
       }}
-      class="text-xl md:hidden"
+      class="text-xl md:hidden aspect-square"
       size="icon"
       variant="ghost"
     >
