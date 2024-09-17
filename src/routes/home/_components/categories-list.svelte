@@ -22,7 +22,7 @@
             src={item.icons[0].url}
           />
           <div
-            class="absolute inset-0 bg-gradient-to-br from-black/50 to-black/10"
+            class="absolute inset-0 bg-gradient-to-br rounded-lg from-black/50 to-black/10"
           ></div>
           <div class="absolute bottom-0 z-50 p-3">
             <span class="text-lg font-medium">

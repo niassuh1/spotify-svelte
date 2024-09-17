@@ -4,7 +4,6 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
   import { sideNavOpenWritable } from "$lib/stores/side-nav-store";
-  import { get } from "svelte/store";
 </script>
 
 <header class="border-b bg-background/70 backdrop-blur-md z-50 sticky top-0">
@@ -21,7 +20,7 @@
     </Button>
     <div class="relative mr-auto">
       <Icon
-        class="absolute top-0 bottom-0 start-3 my-auto w-4 h-4 text-white"
+        class="absolute top-0 bottom-0 start-3 my-auto w-4 h-4 text-foreground"
         icon="solar:rounded-magnifer-outline"
       />
       <Input placeholder="Search Here" class="ps-8" />

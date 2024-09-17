@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import type { UserDetails } from "types/user-details";
 import type { Categories } from "types/categories";
+import type { Playlist } from "types/playlist";
 
 class SpotifyClient {
   login() {
@@ -51,6 +52,25 @@ class SpotifyClient {
     );
 
     return res.data.categories as Categories;
+  }
+
+  async getPlaylists({
+    accessToken,
+    limit,
+  }: {
+    accessToken: string;
+    limit: number;
+  }): Promise<Playlist> {
+    const res = await axios.get(
+      `${SPOTIFY_API_URL}/v1/me/playlists?limit=${limit}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    return res.data as Playlist;
   }
 }
 

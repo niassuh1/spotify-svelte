@@ -14,9 +14,15 @@ export const load = (async ({ cookies }) => {
       accessToken,
       limit: 15,
     });
+    const playlists = await spotifyClient.getPlaylists({
+      accessToken,
+      limit: 10,
+    });
     return {
       user,
       categories,
+      playlists,
+      accessToken,
     };
   }
 }) satisfies PageServerLoad;
