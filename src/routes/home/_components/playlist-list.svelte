@@ -24,11 +24,21 @@
         {/each}
       {:then data}
         {#each data.items as playlist}
-          <Carousel.Item class="basis-1/2 space-y-2">
-            <img class="rounded" alt="" src={playlist.images[0].url} />
+          <Carousel.Item
+            class="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 space-y-2  flex flex-col  gap-2"
+          >
+            <img
+              class="rounded aspect-square object-contain"
+              alt=""
+              src={playlist.images[0].url}
+            />
             <div class="font-medium">{playlist.name}</div>
           </Carousel.Item>
         {/each}
+      {:catch e}
+        <Carousel.Item>
+          <div>You're offline</div>
+        </Carousel.Item>
       {/await}
     </Carousel.Content>
   </Carousel.Root>

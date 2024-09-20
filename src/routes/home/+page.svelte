@@ -10,7 +10,7 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<div class="mx-auto p-3 space-y-6">
+<main class="mx-auto p-3 space-y-6">
   <section class="space-y-3">
     <div class="flex flex-col">
       <span class="text-xs text-muted-foreground font-light"
@@ -26,4 +26,4 @@
     </div>
     <PlaylistList />
   </section>
-</div>
+</main>

@@ -18,13 +18,14 @@
     >
       <Icon icon="solar:hamburger-menu-broken" />
     </Button>
-    <div class="relative mr-auto">
+    <form method="get" action="/home/search" class="relative mr-auto">
       <Icon
         class="absolute top-0 bottom-0 start-3 my-auto w-4 h-4 text-foreground"
         icon="solar:rounded-magnifer-outline"
       />
-      <Input placeholder="Search Here" class="ps-8" />
-    </div>
+
+      <Input name="search" placeholder="Search Here" class="ps-8" />
+    </form>
     <UserMenu />
   </nav>
 </header>
