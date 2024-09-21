@@ -1,25 +1,13 @@
 import type { PageServerLoad } from "./$types";
 
 import { redirect, type Actions } from "@sveltejs/kit";
-import { spotifyClient } from "$lib/spotify/spotify-client";
 
 export const load = (async ({ cookies }) => {
   const accessToken = cookies.get("access_token");
+  console.log(accessToken);
   if (accessToken) {
     try {
-      const user = await spotifyClient.getCurrentUserProfile({ accessToken });
-      const categories = await spotifyClient.getCategories({
-        accessToken,
-        limit: 15,
-      });
-      const playlists = await spotifyClient.getPlaylists({
-        accessToken,
-        limit: 10,
-      });
       return {
-        user,
-        categories,
-        playlists,
         accessToken,
       };
     } catch (e) {

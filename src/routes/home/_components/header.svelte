@@ -4,6 +4,9 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import Button from "$lib/components/ui/button/button.svelte";
   import { sideNavOpenWritable } from "$lib/stores/side-nav-store";
+  import { page } from "$app/stores";
+  import { invalidate } from "$app/navigation";
+  let query = $page.url.searchParams.get("q");
 </script>
 
 <header class="border-b bg-background/70 backdrop-blur-md z-50 sticky top-0">
@@ -24,7 +27,7 @@
         icon="solar:rounded-magnifer-outline"
       />
 
-      <Input name="search" placeholder="Search Here" class="ps-8" />
+      <Input value={query} name="q" placeholder="Search Here" class="ps-8" />
     </form>
     <UserMenu />
   </nav>

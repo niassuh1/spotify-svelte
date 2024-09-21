@@ -35,5 +35,11 @@
         >Sign in with Spotify</Button
       >
     </form>
+    <span
+      class="text-sm flex items-center gap-1 text-muted-foreground text-center"
+    >
+      <Icon icon="solar:info-circle-bold" />
+      This is an unofficial spotify web app</span
+    >
   </div>
 </main>

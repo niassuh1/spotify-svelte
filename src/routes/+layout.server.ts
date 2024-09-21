@@ -13,6 +13,10 @@ export const load: LayoutServerLoad = async ({ cookies, url }) => {
     } else {
       if (!accessToken) {
         if (!match.includes(url.pathname)) redirect(301, "/login");
+      } else {
+        return {
+          accessToken,
+        };
       }
     }
   } catch (e) {

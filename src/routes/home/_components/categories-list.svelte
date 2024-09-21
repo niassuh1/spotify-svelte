@@ -2,7 +2,10 @@
   import { page } from "$app/stores";
   import type { Categories } from "types/categories";
   import * as Carousel from "$lib/components/ui/carousel";
-  let categories = $page.data.categories as Categories;
+  import { spotifyClient } from "$lib/spotify/spotify-client";
+  import Skeleton from "$lib/components/ui/skeleton/skeleton.svelte";
+  let accessToken = $page.data.accessToken;
+  let categories = spotifyClient.getCategories({ accessToken, limit: 15 });
 </script>
 
 <div>
@@ -12,7 +15,15 @@
     }}
   >
     <Carousel.Content class="h-52">
-      {#if categories}
+      {#await categories}
+        {#each Array.from(Array(10).keys()) as item}
+          <Carousel.Item
+            class="basis-full sm:basis-1/2 md:basis-1/4 lg:basis-1/6 space-y-2"
+          >
+            <Skeleton class="w-full h-40" />
+          </Carousel.Item>
+        {/each}
+      {:then categories}
         {#each categories.items as item}
           <Carousel.Item
             class="basis-full sm:basis-1/2 md:basis-1/4 lg:basis-1/6 relative overflow-hidden h-full"
@@ -32,7 +43,7 @@
             </div>
           </Carousel.Item>
         {/each}
-      {/if}
+      {/await}
     </Carousel.Content>
   </Carousel.Root>
 </div>

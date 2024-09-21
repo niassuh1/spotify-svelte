@@ -10,6 +10,9 @@ import axios from "axios";
 import type { UserDetails } from "types/user-details";
 import type { Categories } from "types/categories";
 import type { Playlist } from "types/playlist";
+import type { Search } from "types/search";
+import type { SearchType } from "types/search-type";
+import qs from "querystring";
 
 class SpotifyClient {
   login() {
@@ -71,6 +74,30 @@ class SpotifyClient {
     );
 
     return res.data as Playlist;
+  }
+
+  async search({
+    accessToken,
+    q,
+    type,
+    limit,
+  }: {
+    accessToken: string;
+    q: string;
+    type: SearchType;
+    limit: number;
+  }): Promise<Search> {
+    const query = qs.stringify({
+      q,
+      type,
+      limit,
+    });
+    const res = await axios.get(`${SPOTIFY_API_URL}/v1/search?${query}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.data;
   }
 }
 

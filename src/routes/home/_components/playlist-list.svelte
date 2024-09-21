@@ -17,7 +17,9 @@
     <Carousel.Content>
       {#await playlists}
         {#each Array.from(Array(10).keys()) as item}
-          <Carousel.Item class="basis-1/2 space-y-2">
+          <Carousel.Item
+            class="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 xl:basis-[13%] space-y-2"
+          >
             <Skeleton class="w-full h-40" />
             <Skeleton class="w-20 h-4" />
           </Carousel.Item>
@@ -25,7 +27,7 @@
       {:then data}
         {#each data.items as playlist}
           <Carousel.Item
-            class="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 space-y-2  flex flex-col  gap-2"
+            class="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6 xl:basis-[13%] space-y-2  flex flex-col  gap-2"
           >
             <img
               class="rounded aspect-square object-contain"

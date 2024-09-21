@@ -1,61 +1,72 @@
 <script>
   import { page } from "$app/stores";
   import Button from "$lib/components/ui/button/button.svelte";
-  import { Content } from "$lib/components/ui/card";
+
   import * as Drawer from "$lib/components/ui/drawer";
   import * as Tooltip from "$lib/components/ui/tooltip";
   import { sideNavOpenWritable } from "$lib/stores/side-nav-store";
   import Icon from "@iconify/svelte";
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import { get } from "svelte/store";
-  import { slide } from "svelte/transition";
+
   import { mediaQuery } from "svelte-legos";
 
   let isSideNavOpen = get(sideNavOpenWritable);
   const sideNavSubcribe = sideNavOpenWritable.subscribe((value) => {
     isSideNavOpen = value;
   });
-  onDestroy(sideNavSubcribe);
 
   const isMobile = mediaQuery("(max-width: 768px)");
 
   const navList = [
     {
       title: "Home",
-      icon: "solar:home-angle-2-bold",
+      activeIcon: "solar:home-angle-2-bold",
+      inactiveIcon: "solar:home-angle-2-linear",
       href: "/home",
     },
     {
       title: "My Library",
-      icon: "solar:music-library-2-linear",
-      href: "/library",
+      activeIcon: "solar:music-library-2-bold",
+      inactiveIcon: "solar:music-library-2-linear",
+
+      href: "/home/library",
     },
     {
       title: "Browse",
-      icon: "solar:card-search-linear",
-      href: "/browse",
+      activeIcon: "solar:card-search-bold",
+      inactiveIcon: "solar:card-search-linear",
+      href: "/home/browse",
     },
   ];
 
-  let route = $page.route.id;
+  $: routeId = $page.route.id;
 </script>
 
 <aside class="p-3 border-e hidden md:flex flex-col items-center gap-3">
   <Icon class="text-3xl text-primary" icon="mdi:spotify" />
   {#each navList as navItem}
-    <Tooltip.Root openDelay={250}>
-      <Tooltip.Trigger>
-        <Button
-          variant={route == navItem.href ? "secondary" : "ghost"}
-          size="icon"
+    {#key navItem}
+      <Tooltip.Root openDelay={250}>
+        <Tooltip.Trigger>
+          <a href={navItem.href}>
+            <Button
+              variant={routeId == navItem.href ? "secondary" : "ghost"}
+              size="icon"
+            >
+              <Icon
+                icon={routeId == navItem.href
+                  ? navItem.activeIcon
+                  : navItem.inactiveIcon}
+              />
+            </Button>
+          </a>
+        </Tooltip.Trigger>
+        <Tooltip.Content transitionConfig={{ x: -4, y: 0 }} side="right"
+          >{navItem.title}</Tooltip.Content
         >
-          <Icon icon={navItem.icon} />
-        </Button>
-      </Tooltip.Trigger>
-      <Tooltip.Content transitionConfig={{ x: -4, y: 0 }} side="right"
-        >{navItem.title}</Tooltip.Content
-      >
-    </Tooltip.Root>
+      </Tooltip.Root>
+    {/key}
   {/each}
 </aside>
 {#if $isMobile}
@@ -72,13 +83,22 @@
     <Drawer.Portal>
       <Drawer.Content class="p-3 flex flex-col gap-3  w-64">
         {#each navList as navItem}
-          <Button
-            class="justify-start items-center gap-2"
-            variant={route == navItem.href ? "secondary" : "ghost"}
-          >
-            <Icon icon={navItem.icon} />
-            <span>{navItem.title}</span>
-          </Button>
+          <a class="w-full" href={navItem.href}>
+            <Drawer.Close asChild let:builder>
+              <Button
+                builders={[builder]}
+                class="justify-start items-center gap-2 w-full"
+                variant={routeId == navItem.href ? "secondary" : "ghost"}
+              >
+                <Icon
+                  icon={routeId == navItem.href
+                    ? navItem.activeIcon
+                    : navItem.inactiveIcon}
+                />
+                <span>{navItem.title}</span>
+              </Button>
+            </Drawer.Close>
+          </a>
         {/each}
       </Drawer.Content>
     </Drawer.Portal>
