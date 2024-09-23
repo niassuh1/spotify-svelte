@@ -17,7 +17,7 @@ import qs from "querystring";
 class SpotifyClient {
   login() {
     const scope =
-      "user-library-read user-top-read playlist-read-private user-read-playback-state user-read-currently-playing";
+      "user-library-read user-top-read playlist-read-private user-read-playback-state user-read-currently-playing streaming app-remote-control";
 
     redirect(
       301,

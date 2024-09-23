@@ -9,7 +9,7 @@
   let query = $page.url.searchParams.get("q");
 </script>
 
-<header class="border-b bg-background/70 backdrop-blur-md z-50 sticky top-0">
+<header class="border-b bg-background/85 backdrop-blur-md z-50 sticky top-0">
   <nav class="flex items-center gap-4 mx-auto w-full max-w-screen-2xl p-3">
     <Button
       on:click={() => {

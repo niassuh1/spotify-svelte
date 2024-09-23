@@ -4,6 +4,8 @@
   import * as Carousel from "$lib/components/ui/carousel";
   import { spotifyClient } from "$lib/spotify/spotify-client";
   import Skeleton from "$lib/components/ui/skeleton/skeleton.svelte";
+  import Page from "../+page.svelte";
+
   let accessToken = $page.data.accessToken;
   let categories = spotifyClient.getCategories({ accessToken, limit: 15 });
 </script>

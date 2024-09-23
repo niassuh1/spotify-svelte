@@ -43,7 +43,7 @@
   $: routeId = $page.route.id;
 </script>
 
-<aside class="p-3 border-e hidden md:flex flex-col items-center gap-3">
+<aside class="p-3 border-e hidden md:flex flex-col items-center gap-3 z-50">
   <Icon class="text-3xl text-primary" icon="mdi:spotify" />
   {#each navList as navItem}
     {#key navItem}

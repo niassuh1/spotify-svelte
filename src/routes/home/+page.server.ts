@@ -4,12 +4,10 @@ import { redirect, type Actions } from "@sveltejs/kit";
 
 export const load = (async ({ cookies }) => {
   const accessToken = cookies.get("access_token");
-  console.log(accessToken);
+
   if (accessToken) {
     try {
-      return {
-        accessToken,
-      };
+      return {};
     } catch (e) {
       console.error(e);
       redirect(301, "/login");

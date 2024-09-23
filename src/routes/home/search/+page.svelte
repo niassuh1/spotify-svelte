@@ -5,6 +5,7 @@
   import CarouselItem from "$lib/components/ui/carousel/carousel-item.svelte";
   import { spotifyClient } from "$lib/spotify/spotify-client";
   import type { SearchType } from "types/search-type";
+  import Tracks from "./_components/tracks.svelte";
   let searchTypes: SearchType[] = [
     "track",
     // "album",
@@ -39,7 +40,7 @@
 
 <main class="p-3">
   <Carousel.Root
-    class="bg-background sticky top-[60px] py-3"
+    class="bg-background/85 backdrop-blur-md sticky top-[60px] py-3"
     opts={{ dragFree: true }}
   >
     <Carousel.Content class="">
@@ -70,33 +71,6 @@
   </Carousel.Root>
 
   {#await searchResult then searchResultData}
-    {#each searchResultData.tracks.items as data}
-      <div class="border-b flex gap-3 p-3">
-        <img
-          alt={data.album.name}
-          class="w-16 h-16 object-cover rounded-md"
-          src={data.album.images[0].url}
-        />
-        <div class="flex flex-col">
-          <span
-            class="font-semibold text-lg max-w-32 overflow-ellipsis truncate"
-          >
-            {data.album.name}
-          </span>
-          <div class="flex items-center gap-1">
-            {#if data.explicit}
-              <div
-                class="flex items-center justify-center rounded bg-muted-foreground w-4 h-4 text-[10px] font-semibold text-background"
-              >
-                E
-              </div>
-            {/if}
-            <span class="text-sm text-muted-foreground"
-              >{data.album.artists[0].name}</span
-            >
-          </div>
-        </div>
-      </div>
-    {/each}
+    <Tracks track={searchResultData.tracks} />
   {/await}
 </main>

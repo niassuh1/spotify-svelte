@@ -3,6 +3,8 @@
   import { onMount } from "svelte";
   import CategoriesList from "./_components/categories-list.svelte";
   import PlaylistList from "./_components/playlist-list.svelte";
+
+  import WebPlayback from "./_components/web-playback.svelte";
 </script>
 
 <svelte:head>
@@ -10,7 +12,7 @@
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<main class="mx-auto p-3 space-y-6">
+<main class="relative mx-auto p-3 space-y-6 min-h-[calc(100vh-60.89px)]">
   <section class="space-y-3">
     <div class="flex flex-col">
       <span class="text-xs text-muted-foreground font-light"
